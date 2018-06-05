@@ -24,6 +24,5 @@ header("refresh:3,url=/login/menu");
 
 }
 
-$db = null;
 ?>
                 
