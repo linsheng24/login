@@ -4,7 +4,7 @@ $db=new PDO("mysql:host=localhost;
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 $sth = $db->prepare("SELECT * FROM menber WHERE id=:id AND password=:pass");
 $sth->bindParam(':id', $_POST['id']);
-$sth->bindParam(':pass', $_POST['pass']);
+$sth->bindParam(':pass',hash('sha256', $_POST['pass']));
 $sth->execute();
 
 $row = $sth->fetch(PDO::FETCH_ASSOC);

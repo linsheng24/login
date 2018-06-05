@@ -41,7 +41,8 @@ $db=new PDO("mysql:host=localhost;
 
 $insert = $db->prepare("INSERT INTO menber ( name, password, mail, birth, phone1, phone2, line, sex, address) VALUES (:name,:pass,:mail,:birth,:phone1,:phone2,:line,:sex,:address)");
 $insert->bindParam(":name",$_POST['name']);
-$insert->bindParam(":pass",$_POST['pass']);
+$pass = hash('sha256', $_POST['pass']);
+$insert->bindParam(":pass", $pass);
 $insert->bindParam(":mail",$_POST['mail']);
 $insert->bindParam(":birth",$_POST['birth']);
 $insert->bindParam(":phone1",$_POST['phone1']);
@@ -63,7 +64,7 @@ header("Location:./index.php");
 else{
     
     echo $_POST['name'];
-    echo $_POST['pass'];
+    echo $pass;
     echo $_POST['mail'];
     echo $_POST['birth'];
     echo $_POST['phone1'];
@@ -71,6 +72,7 @@ else{
     echo $_POST['line'];
     echo $_POST['sex'];
     echo $_POST['address'];
+    echo $errorcode;
 }
 
 ?>

@@ -35,7 +35,7 @@
     SET password = :password
     WHERE mail = :mail 
     ");
-    $stmt->bindParam(':password',$_POST['change']);
+    $stmt->bindParam(':password',hash('sha256', $_POST['change']));
     $stmt->bindParam(':mail',$_POST['mail']);
     $row = $stmt->execute();
     echo $_POST['change'].'<br>';
